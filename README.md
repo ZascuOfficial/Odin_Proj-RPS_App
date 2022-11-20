@@ -1,6 +1,6 @@
 # The Odin Project - Rock Paper Scissors
 
-First solo project I had to make as part of the JavaScript part of the Odin Project curriculum.
+First solo project I had to make as part of the JavaScript section of the Odin Project curriculum.
 
 -------------------------------------------------------------------------------------------------
 
