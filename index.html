@@ -22,25 +22,49 @@
 
     <div class="container">
 
-      <h1>
+      <h1 class="title">
         <span class="rock">Rock</span> -
         <span class="paper">Paper</span> - 
         <span class="scissors">Scissors</span>
       </h1>
 
-      <hr>
+      <p class="subtitle">
+        First to reach 5 points wins! (Refresh the page after the round is over if you wish to play again.)
+      </p>
 
       <div class="button-box">
-        <button id="rock-btn">ROCK</button>
+        <button class="btn" id="rock-btn">ROCK</button>
 
-        <button id="paper-btn">PAPER</button>
+        <button class="btn" id="paper-btn">PAPER</button>
 
-        <button id="scissors-btn">SCISSORS</button>
+        <button class="btn" id="scissors-btn">SCISSORS</button>
       </div>
+
+      <div class="info-box">
+
+        <div class="player-info">
+          <h2>Player</h2>
+
+          <p id="player-choice-el">Choice: None</p>
+
+          <p id="player-points-el">Points: 0</p>
+        </div>
+  
+        <div class="computer-info">
+          <h2>Computer</h2>
+
+          <p id="computer-choice-el">Choice: None</p>
+
+          <p id="computer-points-el">Points: 0</p>
+        </div>
+  
+      </div>
+
+      <p id="winner-el">(Start a round to decide the winner!)</p>
 
     </div>
 
-    <script src="js/main.js"></script>
+    <!-- <script src="js/main.js"></script> -->
 
   </body>
 
