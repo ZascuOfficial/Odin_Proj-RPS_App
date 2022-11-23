@@ -14,6 +14,18 @@ VERSION 1:
   
 -------------------------------------------------------------------------------------------------
 
+VERSION 2:
+
+  • Mark-up
+
+  • New UI design
+
+  • Logic reworked for the UI
+
+  • CSS code improved by the usage of variables
+
+-------------------------------------------------------------------------------------------------
+
 "The Odin Project" curriculum - https://theodinproject.com/
 
 The Website Page - https://zascuofficial.github.io/Odin_Proj-RPS_App/
