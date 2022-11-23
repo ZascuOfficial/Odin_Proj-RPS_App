@@ -1,95 +1,126 @@
-let playerScore = 0;
-let computerScore = 0;
+const rockBtn = document.getElementById('rock-btn');
+const paperBtn = document.getElementById('paper-btn');
+const scissorsBtn = document.getElementById('scissors-btn');
+
+const playerChoiceEl = document.getElementById('player-choice-el');
+const playerPointsEl = document.getElementById('player-points-el');
+
+const computerChoiceEl = document.getElementById('computer-choice-el');
+const computerPointsEl = document.getElementById('computer-points-el');
+
+const narratorEl = document.getElementById('narrator-el');
+
+const computerChoices = ['Rock', 'Paper', 'Scissors'];
+
+let isDead = false;
+
+let playerChoice = '';
+let computerChoice = '';
+
+let playerPoints = 0;
+let computerPoints = 0;
 
 function getComputerChoice() {
-
-  let randomChoice = Math.floor(
-    Math.random() * 3
-  );
-
-  switch (randomChoice) {
-
-    case 0: return 'Rock';
-    case 1: return 'Paper';
-    case 2: return 'Scissors';
-
-  }
-
+  return computerChoices[
+    Math.floor(
+      Math.random() * 3
+    )
+  ];
 }
 
-function playRound(playerSelection, computerSelection) {
+rockBtn.addEventListener('click', () => {
+  if (!isDead) {
+    playerChoice = 'Rock';
+    computerChoice = getComputerChoice();
 
-  switch (playerSelection.toLowerCase()) {
+    compareChoices(playerChoice, computerChoice);
 
-    case 'rock':
-      if (computerSelection === 'Rock') {
+    playerPointsEl.textContent = `Points: ${playerPoints}`;
+    computerPointsEl.textContent = `Points: ${computerPoints}`;
 
-        return 'It\'s a tie! Rock can\'t beat Rock!';
-
-      } else if (computerSelection === 'Paper') {
-        computerScore++;
-
-        return 'You lose! Paper beats Rock!';
-      } else {
-        playerScore++;
-
-        return 'You win! Rock beats Scissors!';
-      }
-
-    case 'paper':
-      if (computerSelection === 'Rock') {
-        playerScore++;
-
-        return 'You win! Paper beats Rock!';
-      } else if (computerSelection === 'Paper') {
-
-        return 'It\s a tie! Paper can\'t beat Paper!';
-
-      } else {
-        computerScore++;
-
-        return 'You lose! Scissors beat Paper!';
-      }
-
-    case 'scissors':
-      if (computerSelection === 'Rock') {
-        computerScore++;
-
-        return 'You lose! Rock beats Scissors!';
-      } else if (computerSelection === 'Paper') {
-        playerScore++;
-
-        return 'You win! Scissors beat Paper!';
-      } else {
-
-        return 'It\'s a tie! Scissors can\'t beat Scissors!';
-
-      }
-
-    default:
-      return 'This is not a viable option.';
-
-  }
-
-}
-
-function game() {
-
-  for (let i = 0; i < 5; i++) {
-    let playerChoice = prompt('Please input your choice (Rock / Paper / Scissors): ');
-    let computerChoice = getComputerChoice();
-
-    console.log(playRound(playerChoice, computerChoice));
-  }
-
-  if (playerScore > computerScore) {
-    console.log('The player wins!');
-  } else if (playerScore === computerScore) {
-    console.log('It\'s a tie!');
+    checkPoints(playerPoints, computerPoints);
   } else {
-    console.log('The computer wins!');
+    narratorEl.textContent = 'The game is over. Refresh the page for a new match.';
+    narratorEl.style.color = '#928374'
+  }
+});
+
+paperBtn.addEventListener('click', () => {
+  if (!isDead) {
+    playerChoice = 'Paper';
+    computerChoice = getComputerChoice();
+
+    compareChoices(playerChoice, computerChoice);
+
+    playerPointsEl.textContent = `Points: ${playerPoints}`;
+    computerPointsEl.textContent = `Points: ${computerPoints}`;
+
+    checkPoints(playerPoints, computerPoints);
+  } else {
+    narratorEl.textContent = 'The game is over. Refresh the page for a new match.';
+    narratorEl.style.color = '#928374'
+  }
+});
+
+scissorsBtn.addEventListener('click', () => {
+  if (!isDead) {
+    playerChoice = 'Scissors';
+    computerChoice = getComputerChoice();
+
+    compareChoices(playerChoice, computerChoice);
+
+    playerPointsEl.textContent = `Points: ${playerPoints}`;
+    computerPointsEl.textContent = `Points: ${computerPoints}`;
+
+    checkPoints(playerPoints, computerPoints);
+  } else {
+    narratorEl.textContent = 'The game is over. Refresh the page for a new match.';
+    narratorEl.style.color = '#928374'
+  }
+});
+
+function compareChoices(playerChoice, computerChoice) {
+  playerChoiceEl.textContent = `Choice: ${playerChoice}`;
+  computerChoiceEl.textContent = `Choice: ${computerChoice}`;
+
+  if (playerChoice ===  computerChoice) {
+    narratorEl.textContent = 'Round conclusion: Tie.';
+    narratorEl.style.color = '#d79921';
   }
 
+  if (
+    (playerChoice === 'Rock' && computerChoice === 'Paper') ||
+    (playerChoice === 'Paper' && computerChoice === 'Scissors') ||
+    (playerChoice === 'Scissors' && computerChoice === 'Rock')
+  ) {
+    narratorEl.textContent = 'Round conclusion: Computer wins.';
+    narratorEl.style.color = '#d65d0e';
+
+    computerPoints++;
+  }
+
+  if (
+    (playerChoice === 'Rock' && computerChoice === 'Scissors') ||
+    (playerChoice === 'Paper' && computerChoice === 'Rock') ||
+    (playerChoice === 'Scissors' && computerChoice === 'Paper')
+  ) {
+    narratorEl.textContent = 'Round conclusion: Player wins.';
+    narratorEl.style.color = '#98971a';
+
+    playerPoints++;
+  }
 }
 
-game();
+function checkPoints(playerPoints, computerPoints) {
+  if (playerPoints === 5 || computerPoints === 5) {
+    isDead = true;
+
+    if (playerPoints === 5) {
+      narratorEl.style.color = '#98971a';
+      narratorEl.textContent = `The winner is the Player!`;
+    } else {
+      narratorEl.style.color = '#d65d0e';
+      narratorEl.textContent = `The winner is the Computer!`;
+    }
+  }
+}
